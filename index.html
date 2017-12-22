@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>纯js实现不影响网页点击效果的网页下雪插件</title>
+	<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<style>
+	*{margin:0;padding:0;list-style:none;}
+	html,body{height:100%;overflow: hidden;}
+	body{background: url(images/bg.jpg) no-repeat center center;background-size:cover;}
+	/* 以下是CSS3样式，适合高版本浏览器 */
+	.Snowflake{animation:linear spin infinite 20s;-webkit-animation:linear spin infinite 20s;-moz-animation:linear spin infinite 20s;pointer-events:none;}
+	@keyframes spin{
+		0% {transform:rotate(0deg);}
+		100% {transform:rotate(359deg);}
+	}
+	@-webkit-keyframes spin{
+		0% {-webkit-transform:rotate(0deg);}
+		100% {-webkit-transform:rotate(359deg);}
+	}
+	@-moz-keyframes spin{
+		0% {-moz-transform:rotate(0deg);}
+		100% {-moz-transform:rotate(359deg);}
+	}
+	.egg{
+		width: 347px;
+		margin: 200px auto;
+		position: relative;
+	}
+	.egg img{
+		display: block;
+		width: 347px;
+	}
+	.egg .eggTop{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.qiao{
+		width: 100px;
+		height: 50px;
+		line-height: 50px;
+		position: absolute;
+		bottom: -100px;
+		left: 130px;
+		color: #ffffff;
+		background: red;
+		text-align: center;
+	}
+	.end{
+		position: absolute;
+		top: 45%;
+		left: 45%;
+		background-color: rgba(0, 0, 0, .4);
+		color:#ffffff;
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<div class="egg">
+		<img src="images/eggTop.png" alt="" class="eggTop">
+		<img src="images/egg.png" alt="">
+		<div class="qiao">
+				 点我哦
+			</div>
+	</div>
+	<div class="end">
+		你获得xxxx
+	</div>
+	<script src="js/snowflake.js"></script>
+	<script>
+		createSnow('', 200);
+		$(function(){
+			$('.qiao').on('click',function(){
+				$('.eggTop').animate({top:'-100px'},function(){
+					$('.eggTop').hide();
+					$('.end').show();
+					setTimeout(() => {
+						$('.end').hide();
+					}, 2000);
+				});
+				
+			})
+		})
+	</script>
+</body>
+</html>
